@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 
 let latestIrrigationPrediction = {
-  required: true,
+  required: false,
   suggestion: "No Irrigation Needed",
 };
 let latestFertilizerPrediction = {
@@ -34,7 +34,7 @@ app.post("/sensor-data", async (req, res) => {
     );
 
     latestIrrigationPrediction = {
-      required: !irrigationResponse.data["Irrigation Required"],
+      required: irrigationResponse.data["Irrigation Required"],
       suggestion: irrigationResponse.data["Water Suggestion"],
     };
 
